@@ -1216,7 +1216,8 @@ figure {
   margin-bottom: 0; }
 
 .cards {
-  padding: 0rem 1rem; }
+  padding: 0rem 1rem;
+  margin-bottom: 2rem; }
   .cards .card {
     background-color: #fff; }
 
@@ -1688,6 +1689,7 @@ body {
 
 li .cards {
   flex: 1;
+  margin-bottom: 2rem;
 }
 
 figure {
