@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import fire from './fire';
 import Header from './header';
 import Cards from './cards';
+import Sort from './components/sort';
 import './App.css'; // Tell Webpack that App.js uses these styles
 
 class App extends Component {
@@ -38,6 +39,7 @@ class App extends Component {
         <Header />
         <div className="main">
           <div className="container">
+            <Sort />
             <Cards />
           </div>
         </div>
