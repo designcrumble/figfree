@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class Sort extends Component {
+  sortResources(type) {
+    const { resources, handleResourceChange } = this.props;
+    switch(type) {
+      case 'date': {
+        const sorted = Object.values(resources).sort((a,b) =>
+          moment(a.date_created, "DD-MM-YYYY").format() > moment(b.date_created, "DD-MM-YYYY").format());
+        handleResourceChange(sorted);
+      }
+      break;
+    }
+  }
   render() {
     return (
         <div className="row middle-xs">
@@ -14,7 +26,7 @@ class Sort extends Component {
                 <li>Blogs</li>
                 <li>Misc</li>
               </ul>
-              <div class="sort-action">
+              <div onClick={() => this.sortResources('date')} class="sort-action">
                 Sort by : Date Added
               </div>
             </div>

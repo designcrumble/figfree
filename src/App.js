@@ -8,13 +8,29 @@ import './App.css'; // Tell Webpack that App.js uses these styles
 class App extends Component {
   constructor(props) {
     super(props);
+        // let database = fire.database();
+
+    // this.database = fire.database().ref().child('recommendation');
+    this.database = fire.database().ref().child('resources');
+
     this.state = { 
-      messages: []
-    }; 
+      resources: {},
+    }; // <- set up react state
   }
 
-  handleChange(e) {
-    /* ... */
+  componentDidMount(){
+    this.database.on('value', snap => {
+      // console.log(snap.val());
+      this.setState({
+        // recommendation : snap.val()
+           // id: snap.val()
+           resources: snap.val()
+      })
+    })
+  }
+
+  handleResourceChange(resources) {
+    this.setState({ resources });
   }
 
   componentWillMount(){
@@ -33,14 +49,19 @@ class App extends Component {
     this.inputEl.value = ''; // <- clear the input
   }
 
+  componentWillUnmount() { 
+    this.firebaseRef.off();
+  }
+
   render() {
+    const { resources } = this.state;
     return (
       <div className="body">
         <Header />
         <div className="main">
           <div className="container">
-            <Sort />
-            <Cards />
+            <Sort handleResourceChange={this.handleResourceChange.bind(this)} resources={resources} />
+            <Cards resources={resources} />
           </div>
         </div>
       </div>
