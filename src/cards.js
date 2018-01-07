@@ -3,43 +3,12 @@ import fire from './fire';
 
 
 class Cards extends Component {
-  constructor(props) {
-    super(props);
-
-    // let database = fire.database();
-
-    // this.database = fire.database().ref().child('recommendation');
-    this.database = fire.database().ref().child('resources');
-
-    this.state = { 
-      resources: [],
-      id: null,
-      recommendation: 2,
-      messages: [],
-      user: null // <-- user authentication
-    }; // <- set up react state
-  }
-
-  componentDidMount(){
-    this.database.on('value', snap => {
-      // console.log(snap.val());
-      this.setState({
-        // recommendation : snap.val()
-           // id: snap.val()
-           resources: snap.val()
-      })
-    })
-  }
-
-  componentWillUnmount() {
-    this.firebaseRef.off();
-  }
-
   render() {
+    const { resources } = this.props;
     return (
         <div className="row middle-xs">
             <ul className="flex-list">
-              {Object.values(this.state.resources).map((resource, i) => 
+              {Object.values(resources).map((resource, i) => 
                 <li key={i} className="col-xs-12 col-sm-12 col-md-4 cards">
                     <figure className="card">
                       <img width="720" height="315" src={resource.thumb} alt="" className="card__image" />
@@ -60,5 +29,4 @@ class Cards extends Component {
     );
   }
 }
-
 export default Cards;
