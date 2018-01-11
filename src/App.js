@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import fire from './fire';
 import Header from './header';
+import Footer from './components/footer';
 import Cards from './cards';
+import Hero from './components/hero';
 import Sort from './components/sort';
 import './App.css'; // Tell Webpack that App.js uses these styles
 
@@ -58,12 +60,14 @@ class App extends Component {
     return (
       <div className="body">
         <Header />
+        <Hero />
         <div className="main">
           <div className="container">
             <Sort handleResourceChange={this.handleResourceChange.bind(this)} resources={resources} />
             <Cards resources={resources} />
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
